@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 pub type Bitboard = u64;
 
 pub struct Board {
@@ -16,7 +17,7 @@ pub struct Board {
 }
 
 impl Board {
-    fn new() -> Self {
+    pub fn new() -> Self {
         Self {
             white_pawns: 0x0000_0000_0000_FF00,
             white_rooks: 0x0000_0000_0000_0081,

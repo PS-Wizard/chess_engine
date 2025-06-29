@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use super::{
     board::{Bitboard, Board},
     piece::{Color, PieceType},
@@ -34,5 +35,40 @@ impl Board {
             (Color::Black, PieceType::Queen) => &mut self.black_queens,
             (Color::Black, PieceType::King) => &mut self.black_king,
         }
+    }
+}
+
+#[cfg(test)]
+mod board_utils_test {
+    use super::*;
+
+    #[test]
+    fn test_notation_to_idx_valid() {
+        assert_eq!(notation_to_idx("a1"), Some(0));
+        assert_eq!(notation_to_idx("h1"), Some(7));
+        assert_eq!(notation_to_idx("a8"), Some(56));
+        assert_eq!(notation_to_idx("e4"), Some(28));
+        assert_eq!(notation_to_idx("h8"), Some(63));
+    }
+
+    #[test]
+    fn test_notation_to_idx_invalid() {
+        assert_eq!(notation_to_idx("z9"), None);
+        assert_eq!(notation_to_idx("a9"), None);
+        assert_eq!(notation_to_idx("i1"), None);
+        assert_eq!(notation_to_idx(""), None);
+        assert_eq!(notation_to_idx("e"), None);
+    }
+
+    #[test]
+    fn test_get_bitboard_mut() {
+        let mut board = Board::new();
+
+        let knights = board.get_bitboard_mut(Color::White, PieceType::Knight);
+        assert_eq!(*knights, 0x0000_0000_0000_0042);
+
+        // modify it
+        *knights = 0x1234;
+        assert_eq!(board.white_knights, 0x1234);
     }
 }

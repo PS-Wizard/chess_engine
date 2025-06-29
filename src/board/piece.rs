@@ -18,6 +18,7 @@ pub enum PieceType {
     King,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq)]
 pub struct Piece {
     pub color: Color,
     pub piece_type: PieceType,

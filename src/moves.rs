@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 pub fn get_white_pawn_move(from: usize) -> (Option<usize>, Option<usize>) {
     if from / 8 == 7 {
         // pawn on last rank, no forward moves
