@@ -1,3 +1,2 @@
+mod board;
 mod moves;
-mod types;
-mod utils;
